@@ -1,0 +1,131 @@
+#!/bin/bash
+
+(make clean; make)
+
+total=0
+totalmax=0
+
+rm -f total.txt *.out total.txt
+
+# Test driver
+function runtest {
+  prog=$1
+  args=$2
+  testinput=$3
+  grade=$4
+  inputdescr=
+  if [ "$testinput" != "none" ]; then
+      inputdescr=" < $testinput"
+  fi
+  descr="$prog $args $inputdescr"
+  
+  echo "======= $descr ==========="
+  $prog $args < $testinput > $prog.out
+  $prog.org $args< $testinput > $prog.org.out
+  diff $prog.out $prog.org.out > diff.out
+  if [ $? -eq 0 ]; then
+      cat $prog.out
+      echo Test passed...;
+      printf "%-36s: %-3d of %-3d\n" "$descr " $grade $grade >> total.txt
+      total=`expr $total + $grade`;
+  else
+      echo "*****Test Failed*****";
+      echo ------ Your Output ----------
+      cat $prog.out
+      echo ------ Expected Output ------
+      cat $prog.org.out
+      echo ------ Difference -----------
+      cat diff.out
+      echo -----------------------------
+      printf "%-36s: %-3d of %-3d\n" "$descr " 0 $grade >> total.txt
+  fi
+  totalmax=`expr $totalmax + $grade`;
+  echo
+}
+
+# Test driver2 to test the wav output
+function runtest2 {
+  prog=$1
+  args=$2
+  testinput=$3
+  grade=$4
+  inputdescr=
+  if [ "$testinput" != "none" ]; then
+      inputdescr=" < $testinput"
+  fi
+  descr="$prog $args $inputdescr"
+  
+  echo "======= $descr ==========="
+  rm $args.wav
+  $prog $args.freq < $testinput > $prog.out
+  diff org-$args.wav $args.wav > diff.out
+  if [ $? -eq 0 ]; then
+#      cat $prog.out
+      echo Test passed...;
+      echo files $args.wav and org-$args.wav are the same
+      printf "%-36s: %-3d of %-3d\n" "$descr " $grade $grade >> total.txt
+      total=`expr $total + $grade`;
+  else
+      echo "*****Test Failed*****";
+      echo files $args.wav and org-$args.wav are different
+      printf "%-36s: %-3d of %-3d\n" "$descr " 0 $grade >> total.txt
+  fi
+  totalmax=`expr $totalmax + $grade`;
+  echo
+}
+
+rm -f songs/*.wav
+
+# List of tests running
+runtest test_mysort "test1" none 6
+runtest test_mysort "test2" none 6
+runtest test_mysort "test3" none 6
+runtest test_mysort "test4" none 6
+runtest test_mysort "test5" none 6
+runtest freq2wav "" none 4
+runtest freq2wav "xx" none 4
+runtest freq2wav "songs/notexisting.freq" none 4
+runtest freq2wav "songs/bolero.freq" none 4
+runtest freq2wav "songs/birthday.freq" none 4
+runtest freq2wav "songs/popcorn.freq" none 4
+runtest2 freq2wav "songs/bolero" none 4
+runtest2 freq2wav "songs/birthday" none 4
+runtest2 freq2wav "songs/popcorn" none 4
+runtest2 freq2wav "songs/yesterday" none 4
+runtest test_bits "test1" none 6
+runtest test_bits "test2" none 6
+runtest test_bits "test3" none 6
+runtest test_bits "test4" none 6
+runtest test_bits "test5" none 6
+
+echo
+echo
+echo   "-------------------------------------------------"
+echo   "CS240: Lab 5. $USER   "
+echo   "-------------------------------------------------"
+cat total.txt
+echo   "-------------------------------------------------"
+echo   "                              Total: " $total of $totalmax
+
+echo
+echo "Hints: "
+echo
+echo "a) To run only a single test, edit the file testall"
+echo "   and comment out the 'runtest' lines of the tests you do not"
+echo "   want to run. Make sure to uncomment the lines and run all tests"
+echo "   before you turnin your files."
+echo
+echo "b) You can pause the output by typing "
+echo "     testall | less "
+echo "   and then type <space> to go down or <ctrl-b> to go up."
+echo
+echo "c) You can also run an individual test by copying and pasting the test. "
+echo "   Example:"
+echo "     test_linked_list test7"
+echo
+echo "It is OK to discuss the solutions of the homework but you are suppose to work"
+echo "individually. Copying code is considered academic dishonesty. We have ways to"
+echo "find it and it could be penalized by failing the course and being reported to the"
+echo "Dean of Students. Also, the material you learn in this lab will be in the final exam."
+echo
+echo

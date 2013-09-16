@@ -1,0 +1,564 @@
+rm -f simple-gen test_mysort freq2wav test_bits core
+gcc -g -o test_mysort mysort.c test_mysort.c
+gcc -g -o simple-gen -g simple-gen.c -lm
+gcc -g -o freq2wav freq2wav.c -lm
+gcc -g -o test_bits test_bits.c bits.c
+======= test_mysort test1  ===========
+Assertion failed: a[i] <= a[i+1], file test_mysort.c, line 34
+./testall: line 11: 29141 Abort                   (core dumped) $prog $args <$testinput >$prog.out
+*****Test Failed*****
+------ Your Output ----------
+--- Numbers ----
+a[0]=45
+a[1]=23
+a[2]=78
+a[3]=12
+a[4]=100
+a[5]=1
+a[6]=100
+a[7]=34
+a[8]=90
+a[9]=78
+---- Numbers after Sorting ----
+a[0]=45
+a[1]=23
+a[2]=78
+a[3]=12
+a[4]=100
+a[5]=1
+a[6]=100
+a[7]=34
+a[8]=90
+a[9]=78
+------ Expected Output ------
+--- Numbers ----
+a[0]=45
+a[1]=23
+a[2]=78
+a[3]=12
+a[4]=100
+a[5]=1
+a[6]=100
+a[7]=34
+a[8]=90
+a[9]=78
+---- Numbers after Sorting ----
+a[0]=1
+a[1]=12
+a[2]=23
+a[3]=34
+a[4]=45
+a[5]=78
+a[6]=78
+a[7]=90
+a[8]=100
+a[9]=100
+testWithint OK
+------ Difference -----------
+13,22c13,23
+< a[0]=45
+< a[1]=23
+< a[2]=78
+< a[3]=12
+< a[4]=100
+< a[5]=1
+< a[6]=100
+< a[7]=34
+< a[8]=90
+< a[9]=78
+---
+> a[0]=1
+> a[1]=12
+> a[2]=23
+> a[3]=34
+> a[4]=45
+> a[5]=78
+> a[6]=78
+> a[7]=90
+> a[8]=100
+> a[9]=100
+> testWithint OK
+-----------------------------
+
+======= test_mysort test2  ===========
+Assertion failed: a[i] >= a[i+1], file test_mysort.c, line 60
+./testall: line 11: 29148 Abort                   (core dumped) $prog $args <$testinput >$prog.out
+*****Test Failed*****
+------ Your Output ----------
+--- Numbers ----
+a[0]=45
+a[1]=23
+a[2]=78
+a[3]=12
+a[4]=100
+a[5]=1
+a[6]=100
+a[7]=34
+a[8]=90
+a[9]=78
+---- Numbers after Sorting ----
+a[0]=45
+a[1]=23
+a[2]=78
+a[3]=12
+a[4]=100
+a[5]=1
+a[6]=100
+a[7]=34
+a[8]=90
+a[9]=78
+------ Expected Output ------
+--- Numbers ----
+a[0]=45
+a[1]=23
+a[2]=78
+a[3]=12
+a[4]=100
+a[5]=1
+a[6]=100
+a[7]=34
+a[8]=90
+a[9]=78
+---- Numbers after Sorting ----
+a[0]=100
+a[1]=100
+a[2]=90
+a[3]=78
+a[4]=78
+a[5]=45
+a[6]=34
+a[7]=23
+a[8]=12
+a[9]=1
+testWithint Ascending OK
+------ Difference -----------
+13,22c13,23
+< a[0]=45
+< a[1]=23
+< a[2]=78
+< a[3]=12
+< a[4]=100
+< a[5]=1
+< a[6]=100
+< a[7]=34
+< a[8]=90
+< a[9]=78
+---
+> a[0]=100
+> a[1]=100
+> a[2]=90
+> a[3]=78
+> a[4]=78
+> a[5]=45
+> a[6]=34
+> a[7]=23
+> a[8]=12
+> a[9]=1
+> testWithint Ascending OK
+-----------------------------
+
+======= test_mysort test3  ===========
+Assertion failed: students[i].grade <= students[i+1].grade, file test_mysort.c, line 131
+./testall: line 11: 29155 Abort                   (core dumped) $prog $args <$testinput >$prog.out
+*****Test Failed*****
+------ Your Output ----------
+----- Students ----
+Before
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+----- Students Sorted by Grade ----
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+------ Expected Output ------
+----- Students ----
+Before
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+----- Students Sorted by Grade ----
+0:Chandler              8
+1:Rachael               8
+2:Ross                  8
+3:Monica                9
+4:Joey                 10
+5:Phoebe               10
+testWithStudents1 OK
+------ Difference -----------
+10,15c10,16
+< 0:Rachael               8
+< 1:Monica                9
+< 2:Phoebe               10
+< 3:Joey                 10
+< 4:Ross                  8
+< 5:Chandler              8
+---
+> 0:Chandler              8
+> 1:Rachael               8
+> 2:Ross                  8
+> 3:Monica                9
+> 4:Joey                 10
+> 5:Phoebe               10
+> testWithStudents1 OK
+-----------------------------
+
+======= test_mysort test4  ===========
+Assertion failed: strcmp(students[i].name, students[i+1].name) <= 0, file test_mysort.c, line 160
+./testall: line 11: 29162 Abort                   (core dumped) $prog $args <$testinput >$prog.out
+*****Test Failed*****
+------ Your Output ----------
+----- Students ----
+Before
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+----- Students Sorted by Name ----
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+------ Expected Output ------
+----- Students ----
+Before
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+----- Students Sorted by Name ----
+0:Chandler              8
+1:Joey                 10
+2:Monica                9
+3:Phoebe               10
+4:Rachael               8
+5:Ross                  8
+testWithStudents2 OK
+------ Difference -----------
+10,15c10,16
+< 0:Rachael               8
+< 1:Monica                9
+< 2:Phoebe               10
+< 3:Joey                 10
+< 4:Ross                  8
+< 5:Chandler              8
+---
+> 0:Chandler              8
+> 1:Joey                 10
+> 2:Monica                9
+> 3:Phoebe               10
+> 4:Rachael               8
+> 5:Ross                  8
+> testWithStudents2 OK
+-----------------------------
+
+======= test_mysort test5  ===========
+Assertion failed: strcmp(students[i].name, students[i+1].name) >= 0, file test_mysort.c, line 189
+./testall: line 11: 29169 Abort                   (core dumped) $prog $args <$testinput >$prog.out
+*****Test Failed*****
+------ Your Output ----------
+----- Students ----
+Before
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+----- Students Sorted by Name in Descending order ----
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+------ Expected Output ------
+----- Students ----
+Before
+0:Rachael               8
+1:Monica                9
+2:Phoebe               10
+3:Joey                 10
+4:Ross                  8
+5:Chandler              8
+----- Students Sorted by Name in Descending order ----
+0:Ross                  8
+1:Rachael               8
+2:Phoebe               10
+3:Monica                9
+4:Joey                 10
+5:Chandler              8
+testWithStudents3 OK
+------ Difference -----------
+10,11c10,11
+< 0:Rachael               8
+< 1:Monica                9
+---
+> 0:Ross                  8
+> 1:Rachael               8
+13,14c13,14
+< 3:Joey                 10
+< 4:Ross                  8
+---
+> 3:Monica                9
+> 4:Joey                 10
+15a16
+> testWithStudents3 OK
+-----------------------------
+
+======= freq2wav   ===========
+freq2wav freq-file
+Test passed...
+
+======= freq2wav xx  ===========
+*****Test Failed*****
+------ Your Output ----------
+------ Expected Output ------
+Expected .freq file.
+------ Difference -----------
+0a1
+> Expected .freq file.
+-----------------------------
+
+======= freq2wav songs/notexisting.freq  ===========
+*****Test Failed*****
+------ Your Output ----------
+------ Expected Output ------
+freqFile: songs/notexisting.freq
+waveFile: songs/notexisting.wav
+File "songs/notexisting.freq" not found
+------ Difference -----------
+0a1,3
+> freqFile: songs/notexisting.freq
+> waveFile: songs/notexisting.wav
+> File "songs/notexisting.freq" not found
+-----------------------------
+
+======= freq2wav songs/bolero.freq  ===========
+*****Test Failed*****
+------ Your Output ----------
+------ Expected Output ------
+freqFile: songs/bolero.freq
+waveFile: songs/bolero.wav
+Frequency file: (Hz,ms)
+0: (2092,750) (2092,375) (1976,187) (2092,187) (2348,187) (2092,187) (1976,187) (1760,187) (2092,375) (2092,187) 
+10: (1760,187) (2092,750) (2092,375) (2092,187) (1760,187) (1568,187) (1318,187) (1396,187) (1568,1500) (1568,187) 
+20: (1396,187) (1318,187) (1174,187) (1318,187) (1396,187) (1568,187) (1760,187) (1568,750) (1568,750) (1568,187) 
+30: (1760,187) (1976,187) (1760,187) (1568,187) (1396,187) (1318,187) (1174,187) (1318,187) (1174,187) (1046,375) 
+40: (1046,375) (1046,187) (1174,187) (1318,375) (1396,375) (1174,750) (1568,1500) 
+------ Difference -----------
+0a1,8
+> freqFile: songs/bolero.freq
+> waveFile: songs/bolero.wav
+> Frequency file: (Hz,ms)
+> 0: (2092,750) (2092,375) (1976,187) (2092,187) (2348,187) (2092,187) (1976,187) (1760,187) (2092,375) (2092,187) 
+> 10: (1760,187) (2092,750) (2092,375) (2092,187) (1760,187) (1568,187) (1318,187) (1396,187) (1568,1500) (1568,187) 
+> 20: (1396,187) (1318,187) (1174,187) (1318,187) (1396,187) (1568,187) (1760,187) (1568,750) (1568,750) (1568,187) 
+> 30: (1760,187) (1976,187) (1760,187) (1568,187) (1396,187) (1318,187) (1174,187) (1318,187) (1174,187) (1046,375) 
+> 40: (1046,375) (1046,187) (1174,187) (1318,375) (1396,375) (1174,750) (1568,1500) 
+-----------------------------
+
+======= freq2wav songs/birthday.freq  ===========
+*****Test Failed*****
+------ Your Output ----------
+------ Expected Output ------
+freqFile: songs/birthday.freq
+waveFile: songs/birthday.wav
+Frequency file: (Hz,ms)
+0: (1568,250) (1568,187) (1760,375) (1568,375) (2092,375) (1976,1500) (1568,250) (1568,187) (1760,375) (1568,375) 
+10: (2348,375) (2092,1500) (1568,250) (1568,187) (3136,375) (2636,375) (2092,375) (1976,375) (1760,375) (2792,250) 
+20: (2792,187) (2636,375) (2092,375) (2348,375) (2092,1500) (1568,250) (1568,187) (1760,375) (1568,375) (2092,375) 
+30: (1976,1500) (1568,250) (1568,187) (1760,375) (1568,375) (2348,375) (2092,1500) (1568,250) (1568,187) (3136,375) 
+40: (2636,375) (2092,375) (1976,375) (1760,375) (2792,250) (2792,187) (2636,375) (2092,375) (2348,375) (2092,1500) 
+------ Difference -----------
+0a1,8
+> freqFile: songs/birthday.freq
+> waveFile: songs/birthday.wav
+> Frequency file: (Hz,ms)
+> 0: (1568,250) (1568,187) (1760,375) (1568,375) (2092,375) (1976,1500) (1568,250) (1568,187) (1760,375) (1568,375) 
+> 10: (2348,375) (2092,1500) (1568,250) (1568,187) (3136,375) (2636,375) (2092,375) (1976,375) (1760,375) (2792,250) 
+> 20: (2792,187) (2636,375) (2092,375) (2348,375) (2092,1500) (1568,250) (1568,187) (1760,375) (1568,375) (2092,375) 
+> 30: (1976,1500) (1568,250) (1568,187) (1760,375) (1568,375) (2348,375) (2092,1500) (1568,250) (1568,187) (3136,375) 
+> 40: (2636,375) (2092,375) (1976,375) (1760,375) (2792,250) (2792,187) (2636,375) (2092,375) (2348,375) (2092,1500) 
+-----------------------------
+
+======= freq2wav songs/popcorn.freq  ===========
+*****Test Failed*****
+------ Your Output ----------
+------ Expected Output ------
+freqFile: songs/popcorn.freq
+waveFile: songs/popcorn.wav
+Frequency file: (Hz,ms)
+0: (2092,250) (932,250) (2092,250) (1568,250) (1244,250) (1568,250) (1046,500) (2092,250) (932,250) (2092,250) 
+10: (1568,250) (1244,250) (1568,250) (1046,500) (2092,250) (2348,250) (2488,250) (2092,125) (2488,250) (2092,125) 
+20: (2488,250) (2348,250) (932,125) (2348,250) (932,125) (2348,250) (2092,250) (932,250) (1568,250) (932,250) 
+30: (2092,500) 
+------ Difference -----------
+0a1,7
+> freqFile: songs/popcorn.freq
+> waveFile: songs/popcorn.wav
+> Frequency file: (Hz,ms)
+> 0: (2092,250) (932,250) (2092,250) (1568,250) (1244,250) (1568,250) (1046,500) (2092,250) (932,250) (2092,250) 
+> 10: (1568,250) (1244,250) (1568,250) (1046,500) (2092,250) (2348,250) (2488,250) (2092,125) (2488,250) (2092,125) 
+> 20: (2488,250) (2348,250) (932,125) (2348,250) (932,125) (2348,250) (2092,250) (932,250) (1568,250) (932,250) 
+> 30: (2092,500) 
+-----------------------------
+
+======= freq2wav songs/bolero  ===========
+diff: songs/bolero.wav: No such file or directory
+*****Test Failed*****
+files songs/bolero.wav and org-songs/bolero.wav are different
+
+======= freq2wav songs/birthday  ===========
+diff: songs/birthday.wav: No such file or directory
+*****Test Failed*****
+files songs/birthday.wav and org-songs/birthday.wav are different
+
+======= freq2wav songs/popcorn  ===========
+diff: songs/popcorn.wav: No such file or directory
+*****Test Failed*****
+files songs/popcorn.wav and org-songs/popcorn.wav are different
+
+======= freq2wav songs/yesterday  ===========
+rm: songs/yesterday.wav nonexistent
+diff: songs/yesterday.wav: No such file or directory
+*****Test Failed*****
+files songs/yesterday.wav and org-songs/yesterday.wav are different
+
+======= test_bits test1  ===========
+a:
+00000000000000000000000000001001
+10987654321098765432109876543210
+b:
+00000000000000000000000000000011
+10987654321098765432109876543210
+a&b:
+00000000000000000000000000000001
+10987654321098765432109876543210
+a|b:
+00000000000000000000000000001011
+10987654321098765432109876543210
+a^b:
+00000000000000000000000000001010
+10987654321098765432109876543210
+~a:
+11111111111111111111111111110110
+10987654321098765432109876543210
+Test passed...
+
+======= test_bits test2  ===========
+a:
+00000000000000000000000000001001
+10987654321098765432109876543210
+a after setBitAt(&a,10,1):
+00000000000000000000010000001001
+10987654321098765432109876543210
+a after setBitAt(&a,20,1):
+00000000000100000000010000001001
+10987654321098765432109876543210
+a after setBitAt(&a,0,0):
+00000000000100000000010000001000
+10987654321098765432109876543210
+a after setBitAt(&a,3,0):
+00000000000100000000010000000000
+10987654321098765432109876543210
+Test passed...
+
+======= test_bits test3  ===========
+a:
+11111111111111110001000000001001
+10987654321098765432109876543210
+getBitAt(3)=1
+getBitAt(10)=0
+getBitAt(20)=1
+getBitAt(5)=0
+Test passed...
+
+======= test_bits test4  ===========
+a:
+01101111001001000101111111110010
+10987654321098765432109876543210
+countBits(a,1)=19
+countBits(a,0)=13
+b:
+01111111011001111111111110001001
+10987654321098765432109876543210
+countBits(b,1)=23
+countBits(b,0)=9
+Test passed...
+
+======= test_bits test5  ===========
+a:
+01101111111001000101111110010010
+10987654321098765432109876543210
+maxContinuousOnes(a, &pos)=7 pos=21
+b:
+01111111011001111111111110001001
+10987654321098765432109876543210
+maxContinuousOnes(b, &pos)=12 pos=7
+Test passed...
+
+
+
+-------------------------------------------------
+CS240: Lab 5. cs240   
+-------------------------------------------------
+test_mysort test1                   : 0   of 6  
+test_mysort test2                   : 0   of 6  
+test_mysort test3                   : 0   of 6  
+test_mysort test4                   : 0   of 6  
+test_mysort test5                   : 0   of 6  
+freq2wav                            : 4   of 4  
+freq2wav xx                         : 0   of 4  
+freq2wav songs/notexisting.freq     : 0   of 4  
+freq2wav songs/bolero.freq          : 0   of 4  
+freq2wav songs/birthday.freq        : 0   of 4  
+freq2wav songs/popcorn.freq         : 0   of 4  
+freq2wav songs/bolero               : 0   of 4  
+freq2wav songs/birthday             : 0   of 4  
+freq2wav songs/popcorn              : 0   of 4  
+freq2wav songs/yesterday            : 0   of 4  
+test_bits test1                     : 6   of 6  
+test_bits test2                     : 6   of 6  
+test_bits test3                     : 6   of 6  
+test_bits test4                     : 6   of 6  
+test_bits test5                     : 6   of 6  
+-------------------------------------------------
+                              Total:  34 of 100
+
+Hints: 
+
+a) To run only a single test, edit the file testall
+   and comment out the 'runtest' lines of the tests you do not
+   want to run. Make sure to uncomment the lines and run all tests
+   before you turnin your files.
+
+b) You can pause the output by typing 
+     testall | less 
+   and then type <space> to go down or <ctrl-b> to go up.
+
+c) You can also run an individual test by copying and pasting the test. 
+   Example:
+     test_linked_list test7
+
+It is OK to discuss the solutions of the homework but you are suppose to work
+individually. Copying code is considered academic dishonesty. We have ways to
+find it and it could be penalized by failing the course and being reported to the
+Dean of Students. Also, the material you learn in this lab will be in the final exam.
+
+
