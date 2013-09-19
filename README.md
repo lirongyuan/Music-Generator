@@ -1,13 +1,7 @@
 Music Generator:
 ================
 
-http://www.cs.purdue.edu/homes/grr/cs240/lab5-sound/
-
-Files:
-------
-freq2wav.c:  read a file.freq file passed as argument and generate a file file.wav with the frequency tones indicated by the file.freq file.
-
-A song is a sequence of tones with different sequences and durations. The .freq files describe songs using pairs freq, msecs. For example the song "Happhy Birthday" is described in the file songs/birthday.freq as:
+A song is a sequence of tones with different sequences and durations. The .freq files describe songs using pairs freq, msecs. For example the song "Happy Birthday" is described in the file songs/birthday.freq as:
 
 1568 250
 
@@ -21,17 +15,32 @@ A song is a sequence of tones with different sequences and durations. The .freq 
 
 ...
 
+The program ``freq2wav``  read a file.freq file passed as argument and generate a file file.wav with the frequency tones indicated by the file.freq file.
 
-Setup:
-------
+http://www.cs.purdue.edu/homes/grr/cs240/lab5-sound/
+
+Download
+--------
 ```
-make
+$ git clone https://github.com/lirongyuan/Music-Generator.git
 ```
 
-Run test:
----------
+Setup
+-----
 ```
-testall
+$ make
+```
+
+Usage
+-----
+```
+$ ./freq2wav freq-file
+```
+
+Tests
+-----
+```
+$ ./testall
 ```
 
 
